@@ -1990,7 +1990,11 @@ static int ax_bs_spread_cpu_mask(struct task_struct *task,
 		return AX_SCHED_CPU_NONE;
 
 	for_each_online_cpu(cpu) {
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 4, 0)
 		if (!cpumask_test_cpu(cpu, task->cpus_ptr))
+#else
+		if (!cpumask_test_cpu(cpu, &task->cpus_allowed))
+#endif
 			continue;
 		if (cpu_mask && !cpumask_test_cpu(cpu, cpu_mask))
 			continue;
@@ -2002,7 +2006,11 @@ static int ax_bs_spread_cpu_mask(struct task_struct *task,
 		unsigned int pressure;
 		unsigned int score;
 
-		if (!cpumask_test_cpu(cpu, task->cpus_ptr))
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 4, 0)
+                if (!cpumask_test_cpu(cpu, task->cpus_ptr))
+#else
+                if (!cpumask_test_cpu(cpu, &task->cpus_allowed))
+#endif
 			continue;
 		if (cpu_mask && !cpumask_test_cpu(cpu, cpu_mask))
 			continue;
@@ -2060,7 +2068,11 @@ static int ax_bs_best_cpu_mask(struct task_struct *task,
 		unsigned int pressure;
 		unsigned int score;
 
-		if (!cpumask_test_cpu(cpu, task->cpus_ptr))
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 4, 0)
+                if (!cpumask_test_cpu(cpu, task->cpus_ptr))
+#else
+                if (!cpumask_test_cpu(cpu, &task->cpus_allowed))
+#endif
 			continue;
 		if (cpu_mask && !cpumask_test_cpu(cpu, cpu_mask))
 			continue;
@@ -2096,7 +2108,11 @@ static int ax_bs_fit_cpu_mask(struct task_struct *task,
 		unsigned int pressure;
 		unsigned int score;
 
-		if (!cpumask_test_cpu(cpu, task->cpus_ptr))
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 4, 0)
+                if (!cpumask_test_cpu(cpu, task->cpus_ptr))
+#else
+                if (!cpumask_test_cpu(cpu, &task->cpus_allowed))
+#endif
 			continue;
 		if (cpu_mask && !cpumask_test_cpu(cpu, cpu_mask))
 			continue;
@@ -2136,7 +2152,11 @@ static int ax_bs_lowest_cpu(struct task_struct *task)
 		unsigned int pressure;
 		unsigned int score;
 
-		if (!cpumask_test_cpu(cpu, task->cpus_ptr))
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 4, 0)
+                if (!cpumask_test_cpu(cpu, task->cpus_ptr))
+#else
+                if (!cpumask_test_cpu(cpu, &task->cpus_allowed))
+#endif
 			continue;
 
 		score = ax_bs_get_cpu_score(cpu);
@@ -3394,7 +3414,11 @@ static int ax_svp_best_cpu_mask(struct task_struct *task,
 		unsigned int pressure = 0;
 		unsigned int score;
 
-		if (!cpumask_test_cpu(cpu, task->cpus_ptr))
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 4, 0)
+                if (!cpumask_test_cpu(cpu, task->cpus_ptr))
+#else
+                if (!cpumask_test_cpu(cpu, &task->cpus_allowed))
+#endif
 			continue;
 		if (local_cpu_mask && !cpumask_test_cpu(cpu, local_cpu_mask))
 			continue;
@@ -3533,7 +3557,11 @@ static bool ax_svp_blocks_migration(struct task_struct *task, int src_cpu,
 	    !READ_ONCE(ax_svp_big_only) || !ax_svp_task_util(task))
 		return false;
 
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 4, 0)
 	if (!cpumask_test_cpu(dst_cpu, task->cpus_ptr))
+#else
+	if (!cpumask_test_cpu(dst_cpu, &task->cpus_allowed))
+#endif
 		return true;
 
 	if (ax_bs_get_cpu_score(dst_cpu) >= ax_bs_get_cpu_score(src_cpu))
@@ -4718,7 +4746,11 @@ static void ax_bs_can_migrate_task(void *unused, struct task_struct *task,
 	if (!READ_ONCE(ax_bs_migration_assist) || !READ_ONCE(ax_bs_big_only))
 		return;
 
-	if (!cpumask_test_cpu(dst_cpu, task->cpus_ptr)) {
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 4, 0)
+        if (!cpumask_test_cpu(dst_cpu, task->cpus_ptr)) {
+#else
+        if (!cpumask_test_cpu(dst_cpu, &task->cpus_allowed)) {
+#endif
 		*can_migrate = 0;
 		return;
 	}
