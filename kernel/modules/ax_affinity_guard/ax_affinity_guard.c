@@ -10,6 +10,7 @@
 #include <linux/module.h>
 #include <linux/sched.h>
 #include <linux/uidgid.h>
+#include <linux/version.h>
 #include <ax_sched_common.h>
 #include <trace/hooks/sched.h>
 
