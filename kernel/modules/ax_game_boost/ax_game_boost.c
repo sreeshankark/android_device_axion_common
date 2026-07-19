@@ -16,6 +16,7 @@
 #include <linux/sched/topology.h>
 #include <linux/spinlock.h>
 #include <linux/string.h>
+#include <linux/version.h>
 #include <ax_sched_common.h>
 
 #define GB_MAX_TIDS 16
@@ -288,7 +289,11 @@ static int gb_pick_cpu(struct task_struct *task, unsigned int util,
 		unsigned int pressure;
 		unsigned int score;
 
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 4, 0)
 		if (!cpumask_test_cpu(cpu, task->cpus_ptr))
+#else
+		if (!cpumask_test_cpu(cpu, &task->cpus_allowed))
+#endif
 			continue;
 		if (local_cpu_mask && !cpumask_test_cpu(cpu, local_cpu_mask))
 			continue;
