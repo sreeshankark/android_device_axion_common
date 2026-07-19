@@ -69,7 +69,11 @@ static bool ag_should_swallow(struct task_struct *task,
 	if (READ_ONCE(same_process_only) && task_tgid_nr(task) != task_tgid_nr(current))
 		return false;
 
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 4, 0)
 	cpumask_and(&baseline, task->cpus_ptr, cpu_active_mask);
+#else
+	cpumask_and(&baseline, &task->cpus_allowed, cpu_active_mask);
+#endif
 	cpumask_and(&requested, mask, &baseline);
 	requested_count = cpumask_weight(&requested);
 	baseline_count = cpumask_weight(&baseline);
