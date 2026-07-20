@@ -308,7 +308,7 @@ static void ax_ts_prime_target(pid_t pid)
 	struct task_struct *thread;
 
 	rcu_read_lock();
-	leader = find_task_by_vpid(pid);
+	leader = pid_task(find_vpid(pid), PIDTYPE_PID);
 	if (!leader) {
 		rcu_read_unlock();
 		return;
