@@ -1,0 +1,80 @@
+app_domain(ax_diagnostics)
+net_domain(ax_diagnostics)
+binder_service(ax_diagnostics)
+
+allow ax_diagnostics system_app_data_file:dir create_dir_perms;
+allow ax_diagnostics system_app_data_file:file create_file_perms;
+
+allow ax_diagnostics { app_api_service system_api_service }:service_manager find;
+allow ax_diagnostics activity_service:service_manager find;
+allow ax_diagnostics settings_service:service_manager find;
+allow ax_diagnostics batteryproperties_service:service_manager find;
+allow ax_diagnostics batterystats_service:service_manager find;
+allow ax_diagnostics power_service:service_manager find;
+allow ax_diagnostics package_native_service:service_manager find;
+
+allow ax_diagnostics rootfs:dir getattr;
+
+# proc filesystem
+allow ax_diagnostics proc_stat:file r_file_perms;
+allow ax_diagnostics proc_meminfo:file r_file_perms;
+allow ax_diagnostics proc_loadavg:file r_file_perms;
+allow ax_diagnostics proc_diskstats:file r_file_perms;
+allow ax_diagnostics proc_pressure_cpu:file r_file_perms;
+allow ax_diagnostics proc_pressure_io:file r_file_perms;
+allow ax_diagnostics proc_pressure_mem:file r_file_perms;
+allow ax_diagnostics proc_uid_cputime_showstat:file r_file_perms;
+allow ax_diagnostics proc_cmdline:file r_file_perms;
+allow ax_diagnostics proc:dir r_dir_perms;
+allow ax_diagnostics proc:file r_file_perms;
+
+# per-process /proc/[pid] access for monitoring all processes
+r_dir_file(ax_diagnostics, domain)
+
+# sysfs
+allow ax_diagnostics sysfs_devices_system_cpu:dir r_dir_perms;
+allow ax_diagnostics sysfs_devices_system_cpu:file r_file_perms;
+allow ax_diagnostics sysfs_thermal:dir r_dir_perms;
+allow ax_diagnostics sysfs_thermal:file r_file_perms;
+allow ax_diagnostics sysfs_batteryinfo:dir r_dir_perms;
+allow ax_diagnostics sysfs_batteryinfo:file r_file_perms;
+allow ax_diagnostics sysfs_power:dir r_dir_perms;
+allow ax_diagnostics sysfs_power:file r_file_perms;
+allow ax_diagnostics sysfs_zram:dir r_dir_perms;
+allow ax_diagnostics sysfs_zram:file r_file_perms;
+allow ax_diagnostics sysfs_gpu:dir r_dir_perms;
+allow ax_diagnostics sysfs_gpu:file r_file_perms;
+allow ax_diagnostics sysfs_devfreq_cur:file r_file_perms;
+allow ax_diagnostics sysfs_devfreq_dir:dir r_dir_perms;
+allow ax_diagnostics sysfs_devfreq_dir:file r_file_perms;
+allow ax_diagnostics sysfs_wakeup:dir r_dir_perms;
+allow ax_diagnostics sysfs_wakeup:file r_file_perms;
+
+# generic sysfs access for device-specific labels
+allow ax_diagnostics sysfs:dir r_dir_perms;
+allow ax_diagnostics sysfs:file r_file_perms;
+allow ax_diagnostics sysfs:lnk_file read;
+
+# debugfs wakeup sources
+allow ax_diagnostics debugfs_wakeup_sources:file r_file_perms;
+
+# binder stats
+allow ax_diagnostics binderfs_logs_stats:file r_file_perms;
+allow ax_diagnostics binderfs_logs_proc:dir r_dir_perms;
+allow ax_diagnostics binderfs_logs_proc:file r_file_perms;
+
+# shell exec for dumpsys gfxinfo/power (jank + wakelock collection)
+allow ax_diagnostics shell_exec:file { read execute open getattr map };
+
+# dumpsys service access
+allow ax_diagnostics surfaceflinger_service:service_manager find;
+allow ax_diagnostics gpu_service:service_manager find;
+allow ax_diagnostics graphicsstats_service:service_manager find;
+allow ax_diagnostics procstats_service:service_manager find;
+allow ax_diagnostics cpuinfo_service:service_manager find;
+allow ax_diagnostics meminfo_service:service_manager find;
+allow ax_diagnostics network_management_service:service_manager find;
+
+# sdcard report export
+allow ax_diagnostics media_rw_data_file:dir { create open read write add_name remove_name search getattr };
+allow ax_diagnostics media_rw_data_file:file { create open read write getattr setattr };

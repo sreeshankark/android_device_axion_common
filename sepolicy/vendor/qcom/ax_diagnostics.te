@@ -1,0 +1,7 @@
+# vendor sysfs access for device-specific hwmon/power/gpu nodes
+allow ax_diagnostics vendor_sysfs_battery_supply:dir r_dir_perms;
+allow ax_diagnostics vendor_sysfs_devfreq:dir r_dir_perms;
+allow ax_diagnostics vendor_sysfs_devfreq:file r_file_perms;
+allow ax_diagnostics vendor_sysfs_kgsl:dir r_dir_perms;
+allow ax_diagnostics vendor_sysfs_kgsl:file r_file_perms;
+allow ax_diagnostics vendor_sysfs_kgsl_gpuclk:file r_file_perms;
