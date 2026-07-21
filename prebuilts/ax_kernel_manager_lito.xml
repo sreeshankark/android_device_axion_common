@@ -2,7 +2,7 @@
 <kernel-manager>
     <cpu
         id="little"
-        group="Little CPU"
+        group="Core 0-5 • Efficiency"
         minId="axion_min_freq"
         maxId="axion_max_freq"
         governorId="little_cpu_governor"
@@ -14,7 +14,7 @@
 
     <cpu
         id="big"
-        group="Big CPU"
+        group="Core 6 • Performance"
         minId="axion_min_freq_big"
         maxId="axion_max_freq_big"
         governorId="big_cpu_governor"
@@ -26,7 +26,7 @@
 
     <cpu
         id="prime"
-        group="Prime CPU"
+        group="Core 7 • Ultra Performance"
         minId="axion_min_freq_prime"
         maxId="axion_max_freq_prime"
         governorId="prime_cpu_governor"
