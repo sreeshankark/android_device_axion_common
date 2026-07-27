@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<perf-config>
+    <atmc>
+        <cpu_levels>
+            <level id="1"  little="0,2016000" big="0,2803200" prime="0,3014400"/>
+            <level id="2"  little="0,2016000" big="0,2803200" prime="0,3014400"/>
+            <level id="3"  little="0,1900800" big="0,2707200" prime="0,3014400"/>
+            <level id="4"  little="0,1900800" big="0,2611200" prime="0,2918400"/>
+            <level id="5"  little="0,1843200" big="0,2572800" prime="0,2918400"/>
+            <level id="6"  little="0,1843200" big="0,2361600" prime="0,2803200"/>
+            <level id="7"  little="0,1708800" big="0,2361600" prime="0,2803200"/>
+            <level id="8"  little="0,1708800" big="0,2188800" prime="0,2668800"/>
+            <level id="9"  little="0,1593600" big="0,2188800" prime="0,2668800"/>
+            <level id="10" little="0,1593600" big="0,1920000" prime="0,2457600"/>
+            <level id="11" little="0,1478400" big="0,1920000" prime="0,2457600"/>
+            <level id="12" little="0,1478400" big="0,1824000" prime="0,2304000"/>
+            <level id="13" little="0,1344000" big="0,1824000" prime="0,2304000"/>
+            <level id="14" little="0,1344000" big="0,1708800" prime="0,2150400"/>
+            <level id="15" little="0,1228800" big="0,1708800" prime="0,2150400"/>
+            <level id="16" little="0,1228800" big="0,1593600" prime="0,1900800"/>
+            <level id="17" little="0,1113600" big="0,1593600" prime="0,1900800"/>
+            <level id="18" little="0,1113600" big="0,1497600" prime="0,1900800"/>
+            <level id="19" little="0,1017600" big="0,1497600" prime="0,1766400"/>
+            <level id="20" little="0,1017600" big="0,1401600" prime="0,1766400"/>
+            <level id="21" little="0,902400"  big="0,1401600" prime="0,1766400"/>
+            <level id="22" little="0,902400"  big="0,1286400" prime="0,1766400"/>
+            <level id="23" little="0,787200"  big="0,1286400" prime="0,1766400"/>
+            <level id="24" little="0,787200"  big="0,1286400" prime="0,1766400"/>
+            <level id="25" little="0,787200"  big="0,1286400" prime="0,1766400"/>
+            <level id="26" little="0,787200"  big="0,1286400" prime="0,1766400"/>
+            <level id="27" little="0,787200"  big="0,1286400" prime="0,1766400"/>
+        </cpu_levels>
+
+        <gpu_levels>
+            <level id="1" min="1100" max="1100"/>
+            <level id="2" min="1000" max="1000"/>
+            <level id="3" min="950" max="950"/>
+            <level id="4" min="900" max="900"/>
+            <level id="5" min="835" max="835"/>
+            <level id="6" min="736" max="736"/>
+            <level id="7" min="684" max="684"/>
+            <level id="8" min="633" max="633"/>
+            <level id="9" min="500" max="500"/>
+            <level id="10" min="500" max="500"/>
+            <level id="11" min="500" max="500"/>
+        </gpu_levels>
+
+        <scenes>
+            <scene name="default_scene">
+                <level id="4">
+                    <action unit="cpu" status="2"/>
+                </level>
+                <level id="7">
+                    <action unit="cpu" status="3"/>
+                    <action unit="bg_killer" status="1"/>
+                </level>
+                <level id="11">
+                    <action unit="cpu" status="5"/>
+                    <action unit="dexopt" status="1"/>
+                    <action unit="bg_killer" status="3"/>
+                </level>
+                <level id="14">
+                    <action unit="cpu" status="7"/>
+                    <action unit="bg_killer" status="4"/>
+                </level>
+            </scene>
+
+            <scene name="game">
+                <level id="4">
+                    <action unit="cpu" status="1"/>
+                    <action unit="gpu" status="1"/>
+                </level>
+                <level id="7">
+                    <action unit="cpu" status="2"/>
+                    <action unit="gpu" status="1"/>
+                </level>
+                <level id="11">
+                    <action unit="cpu" status="4"/>
+                    <action unit="gpu" status="2"/>
+                </level>
+                <level id="14">
+                    <action unit="cpu" status="7"/>
+                    <action unit="gpu" status="4"/>
+                </level>
+            </scene>
+
+            <scene name="heating_fgs">
+                <level id="5">
+                    <action unit="cpu" status="3"/>
+                </level>
+                <level id="11">
+                    <action unit="cpu" status="6"/>
+                </level>
+            </scene>
+
+            <scene name="axcamera_photo_preview">
+                <level id="5">
+                    <action unit="cpu" status="3"/>
+                </level>
+                <level id="11">
+                    <action unit="cpu" status="5"/>
+                </level>
+            </scene>
+        </scenes>
+
+        <apps>
+            <app pkgs="com.antutu.ABenchMark,com.andromeda.androbench2,com.primatelabs.geekbench5,com.primatelabs.geekbench6,net.kishonti.gfxbench.v50000.corporate,com.miui.cit" scene="default_scene"/>
+            <app pkgs="com.android.camera,com.xiaomi.camera,com.android.gallery3d,com.miui.gallery" scene="axcamera_photo_preview"/>
+            <app pkgs="com.tencent.tmgp.pubgmhd,com.epicgames.fortnite,com.miHoYo.GenshinImpact,com.miHoYo.hkrpg,com.mojang.minecraftpe,com.HoYoverse.hkrpgoversea,com.miHoYo.Yuanshen,com.pubg.imobile,com.activision.callofduty.shooter,com.dts.freefireth" scene="game"/>
+        </apps>
+    </atmc>
+</perf-config>

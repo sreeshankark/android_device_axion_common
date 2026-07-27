@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    SM6125 (Snapdragon 665) thermal/performance ladder.
+
+    CPU topology:
+      policy0 : CPU0-3 (Little / Kryo 260)
+      policy4 : CPU4-7 (Big / Kryo 260)
+-->
+<perf-config>
+    <atmc>
+
+        <!-- CPU Thermal & Frequency Levels (2 Clusters: Little + Big) -->
+        <cpu_levels>
+            <level id="1"  little="0,1804800" big="0,2016000"/>
+            <level id="2"  little="0,1804800" big="0,2016000"/>
+            <level id="3"  little="0,1804800" big="0,1804800"/>
+            <level id="4"  little="0,1612800" big="0,1804800"/>
+            <level id="5"  little="0,1612800" big="0,1536000"/>
+            <level id="6"  little="0,1420800" big="0,1536000"/>
+            <level id="7"  little="0,1420800" big="0,1401600"/>
+            <level id="8"  little="0,1305600" big="0,1401600"/>
+            <level id="9"  little="0,1305600" big="0,1056000"/>
+            <level id="10" little="0,1017600" big="0,1056000"/>
+            <level id="11" little="0,1017600" big="0,902400"/>
+            <level id="12" little="0,864000"  big="0,902400"/>
+            <level id="13" little="0,864000"  big="0,652800"/>
+            <level id="14" little="0,614400"  big="0,652800"/>
+            <level id="15" little="0,614400"  big="0,300000"/>
+            <level id="16" little="0,300000"  big="0,300000"/>
+            <level id="17" little="0,300000"  big="0,300000"/>
+            <level id="18" little="0,300000"  big="0,300000"/>
+            <level id="19" little="0,300000"  big="0,300000"/>
+            <level id="20" little="0,300000"  big="0,300000"/>
+        </cpu_levels>
+
+        <!-- Adreno 610 GPU Frequency Ladder  -->
+        <gpu_levels>
+            <level id="1" min="950" max="950"/>
+            <level id="2" min="900" max="900"/>
+            <level id="3" min="820" max="820"/>
+            <level id="4" min="745" max="745"/>
+            <level id="5" min="600" max="600"/>
+            <level id="6" min="465" max="465"/>
+            <level id="7" min="320" max="320"/>
+        </gpu_levels>
+
+        <!-- Base Profiles / Scenes -->
+        <scenes>
+
+            <scene name="default_scene">
+                <level id="4">
+                    <action unit="cpu" status="2"/>
+                </level>
+                <level id="7">
+                    <action unit="cpu" status="3"/>
+                    <action unit="bg_killer" status="1"/>
+                </level>
+                <level id="11">
+                    <action unit="cpu" status="5"/>
+                    <action unit="dexopt" status="1"/>
+                    <action unit="bg_killer" status="3"/>
+                </level>
+                <level id="14">
+                    <action unit="cpu" status="7"/>
+                    <action unit="bg_killer" status="4"/>
+                </level>
+            </scene>
+
+            <scene name="game">
+                <level id="4">
+                    <action unit="cpu" status="1"/>
+                    <action unit="gpu" status="1"/>
+                </level>
+                <level id="7">
+                    <action unit="cpu" status="2"/>
+                    <action unit="gpu" status="1"/>
+                </level>
+                <level id="11">
+                    <action unit="cpu" status="4"/>
+                    <action unit="gpu" status="2"/>
+                </level>
+                <level id="14">
+                    <action unit="cpu" status="7"/>
+                    <action unit="gpu" status="4"/>
+                </level>
+            </scene>
+
+            <scene name="heating_fgs">
+                <level id="5">
+                    <action unit="cpu" status="3"/>
+                </level>
+                <level id="11">
+                    <action unit="cpu" status="6"/>
+                </level>
+            </scene>
+
+            <scene name="axcamera_photo_preview">
+                <level id="5">
+                    <action unit="cpu" status="3"/>
+                </level>
+                <level id="11">
+                    <action unit="cpu" status="5"/>
+                </level>
+            </scene>
+
+        </scenes>
+
+        <!-- Application Specific Thermal & Performance Overrides -->
+        <apps>
+
+            <!-- Benchmarks: Lock higher performance under sustained loads -->
+            <app pkgs="com.antutu.ABenchMark,com.andromeda.androbench2,com.primatelabs.geekbench5,com.primatelabs.geekbench6,net.kishonti.gfxbench.v50000.corporate,com.miui.cit">
+                <level id="5">
+                    <action unit="cpu" status="0"/>
+                </level>
+                <level id="13">
+                    <action unit="cpu" status="21"/>
+                </level>
+                <level id="14">
+                    <action unit="cpu" status="24"/>
+                </level>
+            </app>
+
+            <app pkgs="com.futuremark.dmandroid.application">
+                <level id="5">
+                    <action unit="cpu" status="0"/>
+                </level>
+                <level id="12">
+                    <action unit="gpu" status="4"/>
+                </level>
+                <level id="14">
+                    <action unit="gpu" status="5"/>
+                </level>
+            </app>
+
+            <app pkgs="skynet.cputhrottlingtest">
+                <level id="12">
+                    <action unit="cpu" status="20"/>
+                </level>
+                <level id="13">
+                    <action unit="cpu" status="21"/>
+                </level>
+                <level id="14">
+                    <action unit="cpu" status="24"/>
+                </level>
+            </app>
+
+            <!-- Camera & Gallery: Boost photo processing, GCam, and preview -->
+            <app pkgs="com.android.camera,com.xiaomi.camera,com.google.android.GoogleCamera,org.lineageos.aperture,com.android.gallery3d,com.miui.gallery" scene="axcamera_photo_preview"/>
+
+            <!-- Messaging / Social / Video Call: Early throttling for battery saving & reduced heat -->
+            <app pkgs="com.instagram.android,com.facebook.katana,com.whatsapp,com.snapchat.android,us.zoom.videomeetings,com.microsoft.teams,com.google.android.apps.tachyon">
+                <level id="4">
+                    <action unit="cpu" status="14"/>
+                </level>
+                <level id="5">
+                    <action unit="cpu" status="15"/>
+                </level>
+                <level id="6">
+                    <action unit="cpu" status="16"/>
+                </level>
+                <level id="7">
+                    <action unit="cpu" status="19"/>
+                </level>
+            </app>
+
+            <!-- Navigation: Smoother step-down curve for sustained GPS/Screen sessions -->
+            <app pkgs="com.google.android.apps.maps,com.waze">
+                <level id="7">
+                    <action unit="cpu" status="15"/>
+                </level>
+                <level id="8">
+                    <action unit="cpu" status="17"/>
+                </level>
+                <level id="9">
+                    <action unit="cpu" status="21"/>
+                </level>
+                <level id="10">
+                    <action unit="cpu" status="22"/>
+                </level>
+            </app>
+
+            <!-- PUBG Engine / Shooters: Custom permissive curve for higher FPS retention -->
+            <app pkgs="com.tencent.tmgp.pubgmhd,com.pubg.imobile,com.pubg.krmobile,com.vng.pubgmobile">
+                <level id="5">
+                    <action unit="cpu" status="0"/>
+                </level>
+                <level id="7">
+                    <action unit="cpu" status="4"/>
+                </level>
+                <level id="8">
+                    <action unit="cpu" status="7"/>
+                </level>
+                <level id="9">
+                    <action unit="cpu" status="11"/>
+                </level>
+                <level id="10">
+                    <action unit="cpu" status="14"/>
+                </level>
+                <level id="11">
+                    <action unit="cpu" status="20"/>
+                </level>
+            </app>
+
+            <!-- Heavy RPGs (miHoYo): Tuned for sustained thermal stability over burst performance -->
+            <app pkgs="com.miHoYo.GenshinImpact,com.miHoYo.hkrpg,com.HoYoverse.hkrpgoversea,com.miHoYo.Yuanshen">
+                <level id="5">
+                    <action unit="cpu" status="8"/>
+                </level>
+                <level id="8">
+                    <action unit="cpu" status="9"/>
+                </level>
+                <level id="9">
+                    <action unit="cpu" status="10"/>
+                </level>
+                <level id="10">
+                    <action unit="cpu" status="12"/>
+                </level>
+                <level id="11">
+                    <action unit="cpu" status="18"/>
+                </level>
+            </app>
+
+            <!-- General High-Performance Games: Standard boosted game scene -->
+            <app pkgs="com.epicgames.fortnite,com.mojang.minecraftpe,com.activision.callofduty.shooter,com.dts.freefireth,com.garena.game.codm,com.vng.codmvn,com.riotgames.league.wildrift" scene="game"/>
+
+        </apps>
+
+    </atmc>
+</perf-config>

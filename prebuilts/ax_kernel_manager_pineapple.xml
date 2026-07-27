@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Kernel Manager config — SM8635 (Snapdragon 8s Gen 3)
+
+    Pulled directly from device sysfs (3 clusters, 8 cores):
+      policy0 (cpu0-2, 3 cores) -> "Little"  0.3648 - 2.016 GHz
+      policy3 (cpu3-6, 4 cores) -> "Mid"     0.48   - 2.8032 GHz
+      policy7 (cpu7,   1 core)  -> "Prime"   0.48   - 3.0144 GHz
+-->
+<kernel-manager>
+    <cpu
+        id="little"
+        group="Little CPU"
+        minId="axion_min_freq"
+        maxId="axion_max_freq"
+        governorId="little_cpu_governor"
+        minNode="/sys/devices/system/cpu/cpufreq/policy0/scaling_min_freq"
+        maxNode="/sys/devices/system/cpu/cpufreq/policy0/scaling_max_freq"
+        availablePath="/sys/devices/system/cpu/cpufreq/policy0/scaling_available_frequencies"
+        governorNode="/sys/devices/system/cpu/cpufreq/policy0/scaling_governor"
+        governorAvailablePath="/sys/devices/system/cpu/cpufreq/policy0/scaling_available_governors" />
+
+    <cpu
+        id="mid"
+        group="Mid CPU"
+        minId="axion_min_freq_mid"
+        maxId="axion_max_freq_mid"
+        governorId="mid_cpu_governor"
+        minNode="/sys/devices/system/cpu/cpufreq/policy3/scaling_min_freq"
+        maxNode="/sys/devices/system/cpu/cpufreq/policy3/scaling_max_freq"
+        availablePath="/sys/devices/system/cpu/cpufreq/policy3/scaling_available_frequencies"
+        governorNode="/sys/devices/system/cpu/cpufreq/policy3/scaling_governor"
+        governorAvailablePath="/sys/devices/system/cpu/cpufreq/policy3/scaling_available_governors" />
+
+    <cpu
+        id="prime"
+        group="Prime CPU"
+        minId="axion_min_freq_prime"
+        maxId="axion_max_freq_prime"
+        governorId="prime_cpu_governor"
+        minNode="/sys/devices/system/cpu/cpufreq/policy7/scaling_min_freq"
+        maxNode="/sys/devices/system/cpu/cpufreq/policy7/scaling_max_freq"
+        availablePath="/sys/devices/system/cpu/cpufreq/policy7/scaling_available_frequencies"
+        governorNode="/sys/devices/system/cpu/cpufreq/policy7/scaling_governor"
+        governorAvailablePath="/sys/devices/system/cpu/cpufreq/policy7/scaling_available_governors" />
+
+    <gpu
+        node="/sys/class/kgsl/kgsl-3d0/devfreq"
+        currentNode="/sys/class/kgsl/kgsl-3d0/gpuclk"
+        usageNode="/sys/class/kgsl/kgsl-3d0/gpu_busy_percentage"
+        frequencyMultiplier="1"
+        values="255000000,353000000,500000000,633000000,684000000,736000000,835000000,900000000,950000000,1000000000,1100000000" />
+</kernel-manager>
