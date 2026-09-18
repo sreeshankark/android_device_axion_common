@@ -159,7 +159,7 @@
                     <action unit="cpu" status="22"/>
                 </level>
             </app>
-            <app  pkgs="com.tencent.tmgp.pubgmhd,com.epicgames.fortnite,com.miHoYo.GenshinImpact,com.miHoYo.hkrpg,com.mojang.minecraftpe,com.HoYoverse.hkrpgoversea,com.miHoYo.Yuanshen,com.pubg.imobile,com.activision.callofduty.shooter,com.dts.freefireth,com.dts.freefiremax"/>
+            <app  pkgs="com.tencent.tmgp.pubgmhd,com.epicgames.fortnite,com.miHoYo.GenshinImpact,com.miHoYo.hkrpg,com.mojang.minecraftpe,com.HoYoverse.hkrpgoversea,com.miHoYo.Yuanshen,com.pubg.imobile,com.activision.callofduty.shooter,com.dts.freefireth,com.dts.freefiremax">
                 <level id="5">
                     <action unit="cpu" status="8"/>
                 </level>
