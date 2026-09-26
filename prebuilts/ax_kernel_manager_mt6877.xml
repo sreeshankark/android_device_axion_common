@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<kernel-manager>
+    <cpu
+        id="little"
+        group="cpu 0-5"
+        minId="axion_min_freq"
+        maxId="axion_max_freq"
+        governorId="little_cpu_governor"
+        minNode="/sys/devices/system/cpu/cpufreq/policy0/scaling_min_freq"
+        maxNode="/sys/devices/system/cpu/cpufreq/policy0/scaling_max_freq"
+        availablePath="/sys/devices/system/cpu/cpufreq/policy0/scaling_available_frequencies"
+        governorNode="/sys/devices/system/cpu/cpufreq/policy0/scaling_governor"
+        governorAvailablePath="/sys/devices/system/cpu/cpufreq/policy0/scaling_available_governors" />
+
+    <cpu
+        id="big"
+        group="cpu 6-7"
+        minId="axion_min_freq_big"
+        maxId="axion_max_freq_big"
+        governorId="big_cpu_governor"
+        minNode="/sys/devices/system/cpu/cpufreq/policy6/scaling_min_freq"
+        maxNode="/sys/devices/system/cpu/cpufreq/policy6/scaling_max_freq"
+        availablePath="/sys/devices/system/cpu/cpufreq/policy6/scaling_available_frequencies"
+        governorNode="/sys/devices/system/cpu/cpufreq/policy6/scaling_governor"
+        governorAvailablePath="/sys/devices/system/cpu/cpufreq/policy6/scaling_available_governors" />
+</kernel-manager>

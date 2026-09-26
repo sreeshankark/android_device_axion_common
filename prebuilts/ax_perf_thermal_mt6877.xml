@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<perf-config>
+    <atmc>
+        <cpu_levels>
+            <level id="1" little="0,2000" big="0,2600"/>
+            <level id="2" little="0,1903" big="0,2400"/>
+            <level id="3" little="0,1800" big="0,2275"/>
+            <level id="4" little="0,1703" big="0,2150"/>
+            <level id="5" little="0,1600" big="0,2000"/>
+            <level id="6" little="0,1503" big="0,1900"/>
+            <level id="7" little="0,1407" big="0,1800"/>
+            <level id="8" little="0,1310" big="0,1660"/>
+            <level id="9" little="0,1260" big="0,1540"/>
+            <level id="10" little="0,1150" big="0,1430"/>
+            <level id="11" little="0,1053" big="0,1300"/>
+            <level id="12" little="0,980" big="0,1140"/>
+            <level id="13" little="0,900" big="0,1040"/>
+            <level id="14" little="0,740" big="0,910"/>
+            <level id="15" little="0,650" big="0,740"/>
+            <level id="16" little="0,500" big="0,650"/>
+        </cpu_levels>
+        <scenes>
+            <scene name="default_scene">
+                <level id="5">
+                    <action unit="cpu" status="3"/>
+                </level>
+                <level id="8">
+                    <action unit="cpu" status="6"/>
+                </level>
+                <level id="10">
+                    <action unit="cpu" status="8"/>
+                </level>
+                <level id="12">
+                    <action unit="cpu" status="10"/>
+                </level>
+                <level id="14">
+                    <action unit="cpu" status="13"/>
+                </level>
+            </scene>
+        </scenes>
+    </atmc>
+</perf-config>

@@ -315,15 +315,15 @@ int axd_proc_init(void)
 {
     ax_nta_dir = proc_mkdir(AXD_PROC_NTA_DIR, NULL);
     if (ax_nta_dir) {
-        proc_create(AXD_PROC_PID, 0660, ax_nta_dir, &nta_pid_ops);
-        proc_create(AXD_PROC_NTA, 0220, ax_nta_dir, &nta_affinity_ops);
-        proc_create(AXD_PROC_RESET, 0220, ax_nta_dir, &nta_reset_ops);
+        proc_create(AXD_PROC_PID, 0666, ax_nta_dir, &nta_pid_ops);
+        proc_create(AXD_PROC_NTA, 0222, ax_nta_dir, &nta_affinity_ops);
+        proc_create(AXD_PROC_RESET, 0222, ax_nta_dir, &nta_reset_ops);
     }
 
     ax_dragonite_dir = proc_mkdir(AXD_PROC_DRAGONITE_DIR, NULL);
     if (ax_dragonite_dir) {
-        proc_create(AXD_PROC_BOOST, 0220, ax_dragonite_dir, &dragonite_boost_ops);
-        proc_create(AXD_PROC_KSWAPD_PIN, 0220, ax_dragonite_dir, &dragonite_kswapd_ops);
+        proc_create(AXD_PROC_BOOST, 0222, ax_dragonite_dir, &dragonite_boost_ops);
+        proc_create(AXD_PROC_KSWAPD_PIN, 0222, ax_dragonite_dir, &dragonite_kswapd_ops);
         proc_create(AXD_PROC_STATS, 0444, ax_dragonite_dir, &dragonite_stats_ops);
     }
 
